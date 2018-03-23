@@ -4,7 +4,8 @@ MAINTAINER Robin Smidsrød <robin@smidsrod.no>
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get -q -y update \
+RUN echo "nameserver 10.0.0.71" > /etc/resolv.conf \
+ && apt-get -q -y update \
  && apt-get -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" install apt-utils \
  && apt-get -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" dist-upgrade \
  && apt-get -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" install isc-dhcp-server man \
