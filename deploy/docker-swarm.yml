@@ -1,0 +1,21 @@
+version: '3.2'
+services:
+    dhcp-server:
+        hostname: dhcp-server
+        image: networkboot/dhcpd
+        volumes:
+            - /storage/misc/dhcpd/data:/data
+        deploy:
+            mode: replicated
+            replicas: 1
+            placement:
+                constraints:
+                - node.hostname == LA-RaCtrl-CO-Srv-1
+        command: general-data
+        networks: 
+           - outside
+
+networks:
+    outside:
+      external:
+          name: "host"
